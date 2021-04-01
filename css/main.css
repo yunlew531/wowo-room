@@ -333,19 +333,19 @@ body {
 }
 
 .swap main .banner .swiper-button-prev {
-  left: 180px;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  left: 140px;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .swap main .banner .swiper-button-prev:hover {
-  -webkit-transform: rotate(-90deg) scale(1.1);
-          transform: rotate(-90deg) scale(1.1);
+  -webkit-transform: rotate(90deg) scale(1.1);
+          transform: rotate(90deg) scale(1.1);
 }
 
 .swap main .banner .swiper-button-prev:active {
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .swap main .banner .swiper-button-prev::after {
@@ -353,19 +353,19 @@ body {
 }
 
 .swap main .banner .swiper-button-next {
-  left: 140px;
-  -webkit-transform: rotate(90deg) translateX(-4px);
-          transform: rotate(90deg) translateX(-4px);
+  left: 180px;
+  -webkit-transform: rotate(-90deg) translateX(-4px);
+          transform: rotate(-90deg) translateX(-4px);
 }
 
 .swap main .banner .swiper-button-next:hover {
-  -webkit-transform: rotate(90deg) translateX(-4px) scale(1.1);
-          transform: rotate(90deg) translateX(-4px) scale(1.1);
+  -webkit-transform: rotate(-90deg) translateX(-4px) scale(1.1);
+          transform: rotate(-90deg) translateX(-4px) scale(1.1);
 }
 
 .swap main .banner .swiper-button-next:active {
-  -webkit-transform: rotate(90deg) translateX(-4px);
-          transform: rotate(90deg) translateX(-4px);
+  -webkit-transform: rotate(-90deg) translateX(-4px);
+          transform: rotate(-90deg) translateX(-4px);
 }
 
 .swap main .banner .swiper-button-next::after {
