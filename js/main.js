@@ -14,3 +14,11 @@ const swiper = new Swiper('.swiper-container', {
     prevEl: '.swiper-button-prev',
   },
 });
+
+function init() {
+  animate.classList.add('active');
+}
+
+const animate = document.querySelector('.animate');
+
+init();

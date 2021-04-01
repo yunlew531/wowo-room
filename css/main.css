@@ -71,6 +71,25 @@ body {
   font-family: "Geeza Pro";
 }
 
+.animate {
+  width: 120%;
+  height: 100vh;
+  background: #fff;
+  position: absolute;
+  z-index: 11;
+  -webkit-transform: skewX(20deg);
+          transform: skewX(20deg);
+  -webkit-transition: 1s ease-in;
+  transition: 1s ease-in;
+  left: -10%;
+}
+
+.animate.active {
+  width: 0;
+  -webkit-transform: skewX(-20deg);
+          transform: skewX(-20deg);
+}
+
 .swap .header {
   display: -webkit-box;
   display: -ms-flexbox;
