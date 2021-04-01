@@ -120,17 +120,17 @@ body {
             left: 8%;
             font-weight: bold;
             h2 {
-              font-size: 70px;
+              font-size: 65px;
               margin-bottom: 10px;
               border-bottom: 2px solid #000;
-              padding-left: 0;
+              padding-left: -30px;
               &.active {
                 padding-left: 30px;
                 transition: ease-in 1s;
               }
             }
             span {
-              margin-right: 20px;
+              margin-right: 10px;
             }
             .more-product {
               @include flex(flex-end, center);
