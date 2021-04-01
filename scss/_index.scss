@@ -101,13 +101,19 @@ body {
           .banner-title {
             &::before {
               content: "";
-              width: 100%;
+              width: 0%;
               height: 120px;
               background: #fff;
               position: absolute;
               z-index: -1;
               left: -50px;
               bottom: -50px;
+            }
+            &.active {
+              &::before {
+                width: 100%;
+                transition: 1s ease-out;
+              }
             }
             position: absolute;
             top: 38%;
@@ -117,6 +123,11 @@ body {
               font-size: 70px;
               margin-bottom: 10px;
               border-bottom: 2px solid #000;
+              padding-left: 0;
+              &.active {
+                padding-left: 30px;
+                transition: ease-in 1s;
+              }
             }
             span {
               margin-right: 20px;
