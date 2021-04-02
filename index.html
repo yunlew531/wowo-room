@@ -13,31 +13,30 @@
 </head>
 
 <body>
-  <div class="animate"></div>
-  <div class="swap">
+  <div id="enterAnimate" class="enter-animate"></div>
+  <div class="index-swap">
     <header class="header">
       <h1>
         <a href="#">WOWOROOM</a>
       </h1>
       <ul class="header-nav">
-        <li><a href="#">床墊優勢</a></li>
-        <li><a href="#">好評推薦</a></li>
-        <li><a href="#">運送方式</a></li>
-        <li><a href="#">立即預定</a></li>
+        <li><a href="#advantagePanel">床墊優勢</a></li>
+        <li><a href="#commentPanel">好評推薦</a></li>
+        <li><a id="transportModeBtn" href="#">運送方式</a></li>
+        <li><a href="#productPanel">立即預定</a></li>
       </ul>
     </header>
 
-    <main>
-      <section class="banner">
+    <main class="main">
+
+      <section class="banner-panel">
         <i class="fas fa-sort-down swiper-button-prev"></i>
         <i class="fas fa-sort-down swiper-button-next"></i>
         <div class="swiper-pagination"></div>
-        <div class="page-change">
-
-        </div>
+        <div class="page-change"></div>
         <div class="swiper-container">
           <div class="banner-filter">
-            <div class="banner-title">
+            <div id="bannerTitle" class="banner-title">
               <h2>窩窩家居 跟您一起品味生活</h2>
               <p><span>2021.2.5</span>LOOKBOOK - 2021 SPRING-SUMMER</p>
               <a href="#" class="more-product"><span>more information...!</span><i
@@ -56,15 +55,204 @@
           </div>
         </div>
       </section>
+
+      <section id="advantagePanel" class="advantage-panel">
+        <div class="environmental">
+          <div class="environmental-text">
+            <h2>無甲醛、無毒、環保、品質<br>天然原木、溫潤質感。</h2>
+            <p>避開有甲醛疑慮的人造板材，挑選真正無毒健康原木板材，窩窩木材兼具耐用與視覺感受。<br>原木板材的截面木紋與正面應延續不斷點，擁有明顯凹凸樹節，且木紋會從此延伸而出。<br>天然木紋花色不會重複!</p>
+          </div>
+          <img class="side-img" src="./img/caption_aboutJeanasis.png" alt="" srcset="">
+          <img class="environmental-wood-img" src="./img/photo-1554229897-66ba7bb2846e.jfif" alt="" srcset="">
+          <a href="#" class="more-information"><span>更多資訊</span><i class="fas fa-long-arrow-alt-right"></i></a>
+        </div>
+      </section>
+
+      <section class="product-introduce-panel">
+        <img class="left-side-img" src="./img/el-jeanasis__logo.webp" alt="">
+        <img class="product-img" src="./img/photo-1576354302919-96748cb8299e-1@2x.png" alt="">
+        <img class="product-img" src="./img/photo-1583250543752-11da1d6ebbe0@2x.png" alt="">
+        <img class="right-side-img" src="./img/caption_2020-el-jeanasis.webp" alt="">
+        <a href="#productPanel" class="product-page"><span>GO TO THE PAGE</span><i
+             class="fas fa-long-arrow-alt-right"></i></a>
+      </section>
+
+      <section class="compared-panel">
+        <div>
+          <h2>家具比較</h2>
+          <table>
+            <tr>
+              <th></th>
+              <th colspan="1">窩窩系統模組家具</th>
+              <th class="secondary">組合式家具</th>
+              <th class="secondary">實木家具</th>
+            </tr>
+            <tr>
+              <th>可單人自行組裝</th>
+              <td><i class="fas fa-check-circle"></i></td>
+              <td class="secondary">不一定</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>可多次重覆拆裝</th>
+              <td><i class="fas fa-check-circle"></i></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>床墊規格彈性大</th>
+              <td><i class="fas fa-check-circle"></i></td>
+              <td class="secondary">不一定</td>
+              <td class="secondary">不一定</td>
+            </tr>
+            <tr>
+              <th>材質可長久使用</th>
+              <td><i class="fas fa-check-circle"></i></td>
+              <td></td>
+              <td><i class="fas fa-check-circle"></i></td>
+            </tr>
+            <tr>
+              <th>小客車即可搬運</th>
+              <td><i class="fas fa-check-circle"></i></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="commentPanel" class="comment-panel">
+        <div class="comment">
+          <h3>好評推薦</h3>
+          <ul class="card-group">
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 2.png" alt="">
+                  <div>
+                    <h4>王六角</h4>
+                    <span class="purple-color">Jodan 雙人床架</span>
+                  </div>
+                </div>
+                <p>CP值很高。</p>
+              </div>
+            </li>
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 3.png" alt="">
+                  <div>
+                    <h4>Leaf</h4>
+                    <span class="purple-color">Antony 雙人床架</span>
+                  </div>
+                </div>
+                <p>很喜歡～還有送三年保固～</p>
+              </div>
+            </li>
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 5.png" alt="">
+                  <div>
+                    <h4>美濃鄧子琪</h4>
+                    <span class="purple-color">Charles 系列儲物組合</span>
+                  </div>
+                </div>
+                <p>廚房必備美用品！</p>
+              </div>
+            </li>
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 3-1.png" alt="">
+                  <div>
+                    <h4>小杰</h4>
+                    <span class="purple-color">Louvre 雙人床架</span>
+                  </div>
+                </div>
+                <p>非常舒適，有需要會再回購</p>
+              </div>
+            </li>
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 9.png" alt="">
+                  <div>
+                    <h4>江八角</h4>
+                    <span class="purple-color">Charles 雙人床架</span>
+                  </div>
+                </div>
+                <p>品質不錯～</p>
+              </div>
+            </li>
+            <li class="card">
+              <img src="/img/photo-1576354302919-96748cb8299e.png" alt="">
+              <div class="card-content">
+                <div class="card-head">
+                  <img src="./img/Ellipse 10.png" alt="">
+                  <div>
+                    <h4>juni讚神</h4>
+                    <span class="purple-color">Antony 床邊桌</span>
+                  </div>
+                </div>
+                <p>讚ㄉ！</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="productPanel" class="product-panel">
+        <h2>窩窩家居</h2>
+        <div class="search-group">
+          <select name="" id="categorySelect">
+            <option value="">全部品項</option>
+            <option value="品項1">品項1</option>
+            <option value="品項2">品項2</option>
+          </select>
+          <div class="product-input-group">
+            <input id="productSearchInput" type="text" placeholder="輸入商品">
+            <button id="productSearchBtn" class="product-search-btn">search</i></button>
+          </div>
+
+        </div>
+        <ul id="cardGroup" class="card-group">
+          <li class="card">
+            <a class="card-header" href="#">
+              <img src="./img/photo-1583250543752-11da1d6ebbe0@2x.png" alt="">
+              <div class="card-content">
+                <h3>Antony 雙人床架／雙人加大</h3>
+                <del>NT$18,000</del>
+                <p>NT$12,000</p>
+                <button class="addCart-btn">加入購物車</button>
+              </div>
+              <span class="new-item">New</span>
+            </a>
+          </li>
+        </ul>
+
+        <section id="transportPanel" class="transport-panel">
+          <img src="./img/225210.jpg" alt="">
+          <button id="transportBtn"><i class="fas fa-times"></i></button>
+        </section>
+
     </main>
 
-    <footer>
-
+    <footer class="footer">
+      <a href="#">窩窩家居<span></span></a>
+      <p>@ WOWO Co., Ltd. All rights reserved.</p>
     </footer>
+
   </div>
 
   <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./js/main.js"></script>
 </body>
 
