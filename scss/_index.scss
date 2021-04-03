@@ -484,6 +484,9 @@ body {
           &:hover {
             color: #fff;
           }
+          &:active {
+            background: rgb(46, 46, 46);
+          }
         }
       }
       .card-group {
@@ -519,12 +522,10 @@ body {
               h3 {
                 font-size: $font-xs;
               }
-              :nth-last-child(2) {
+              > p {
                 font-size: $font-m;
               }
               .addCart-btn {
-                // @include absolute(null, 50%, 0);
-                // transform: translateX(-50%);
                 font-size: $font-xs;
                 background: #000;
                 color: #fff;
@@ -532,11 +533,19 @@ body {
                 padding: 5px 15px;
                 border-radius: 20px;
                 transition: 0.2s ease;
+                margin-right: 5px;
                 &:hover {
                   color: #000;
                   background: #fff;
                   border: 1px solid #000;
                 }
+                &:active {
+                  background: rgb(236, 236, 236);
+                }
+              }
+              .cart-num-select {
+                width: 35px;
+                height: 30px;
               }
             }
             .new-item {
@@ -551,6 +560,16 @@ body {
             }
           }
         }
+      }
+    }
+
+    .cart-panel {
+      width: 500px;
+      margin: 100px auto;
+      .removeAll-btn {
+        width: 100px;
+        height: 50px;
+        background: coral;
       }
     }
 

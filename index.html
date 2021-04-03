@@ -219,7 +219,6 @@
             <input id="productSearchInput" type="text" placeholder="輸入商品">
             <button id="productSearchBtn" class="product-search-btn">search</i></button>
           </div>
-
         </div>
         <ul id="cardGroup" class="card-group">
           <li class="card">
@@ -229,18 +228,38 @@
                 <h3>Antony 雙人床架／雙人加大</h3>
                 <del>NT$18,000</del>
                 <p>NT$12,000</p>
-                <button class="addCart-btn">加入購物車</button>
+                <div>
+                  <button class="addCart-btn">加入購物車</button>
+                  <select class="cart-num-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </div>
+
               </div>
               <span class="new-item">New</span>
             </a>
           </li>
         </ul>
+      </section>
 
-        <section id="transportPanel" class="transport-panel">
-          <img src="./img/225210.jpg" alt="">
-          <button id="transportBtn"><i class="fas fa-times"></i></button>
-        </section>
+      <section id="transportPanel" class="transport-panel">
+        <img src="./img/225210.jpg" alt="">
+        <button id="transportBtn"><i class="fas fa-times"></i></button>
+      </section>
 
+      <section id="cartPanel" class="cart-panel">
+        <h3>購物車</h3>
+        <ul id="cartGroup">
+          <li></li>
+        </ul>
+        <button id="removeAllBtn" class="removeAll-btn">全刪</button>
+
+      </section>
     </main>
 
     <footer class="footer">

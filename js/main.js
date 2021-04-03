@@ -14,38 +14,65 @@ function bannerTitleHandler(length) {
   }, 5000);
 }
 
+// 開啟運送方式窗
 function showTransportPanel() {
   transportPanel.classList.toggle('active');
 }
 
+// 關閉運送方式窗
 function closeTransportPanel() {
   transportPanel.classList.remove('active');
 }
 
+// 取得商品
 function getProducts() {
-  const api = `https://hexschoollivejs.herokuapp.com/api/livejs/v1/customer/${API_PATH}/products`;
+  const api = `${API}/api/livejs/v1/customer/${api_path}/products`;
   axios.get(api).then(res => {
     data = res.data.products;
     renderProducts(data);
     categoryArrHandler(); // 整理出種類不重複陣列
-    renderProductsSelect(categoryArr);
+    renderProductsSelect(categoryArr); // 渲染種類選項
+    const addCartBtns = document.querySelectorAll('#productPanel .addCart-btn');
+    addCartBtns.forEach(addCartBtn => addCartBtn.addEventListener('click', addCart));
   }).catch(err => {
     console.log(err);
   })
 }
 
+// 取得購物車
+function getCarts() {
+  const api = `${API}​​/api/livejs/v1/customer/${api_path}/carts`;
+  axios.get(api).then(res => {
+    cartData = res.data.carts;
+    renderCart(cartData);
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+// 渲染商品卡片
 function renderProducts(arr) {
   let str = ''
   arr.forEach(item => {
     const content = `
-      <li class="card">
-        <a class="card-header" href="#">
+      <li id="${item.id}" class="card">
+        <a class="card-header" href="javascript:void(0)">
           <img src="${item.images}" alt="">
           <div class="card-content">
             <h3>${item.title}</h3>
             <del>NT$${item.origin_price}</del>
             <p>NT$${item.price}</p>
-            <button class="addCart-btn">加入購物車</button>
+            <div>
+              <button class="addCart-btn">加入購物車</button>
+              <select class="cart-num-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
           </div>
           <span class="new-item">New</span>
         </a>
@@ -56,6 +83,20 @@ function renderProducts(arr) {
   cardGroup.innerHTML = str;
 }
 
+// 渲染購物車
+function renderCart(arr) {
+  let str = '';
+  arr.forEach(cart => {
+    str += `
+    <li id=${cart.id}>
+    <p>${cart.product.title}<span style="margin-left: 20px">${cart.quantity}</span><span style="margin-left: 20px">${cart.product.price}</span></p>
+    </li>
+    `;
+  })
+  cartGroup.innerHTML = str;
+}
+
+// 依輸入框過濾商品卡片
 function filterProduct(e) {
   if (e.keyCode === 13 || e.type === 'click') {
     const value = productSearchInput.value;
@@ -65,6 +106,7 @@ function filterProduct(e) {
   }
 }
 
+// 將重複種類過濾整理成陣列
 function categoryArrHandler() {
   data.forEach(item => {
     const isRepeat = categoryArr.some(category => category === item.category);
@@ -73,6 +115,7 @@ function categoryArrHandler() {
   })
 }
 
+// 渲染種類選項
 function renderProductsSelect(arr) {
   let str = `<option value="">全部品項</option>`;
   arr.forEach(item => {
@@ -84,14 +127,54 @@ function renderProductsSelect(arr) {
   categorySelect.innerHTML = str;
 }
 
+// 依種類過濾商品卡片
 function filterCategory(e) {
   const filterArr = data.filter(item => item.category.match(e.target.value));
   renderProducts(filterArr);
 }
 
+// 加入購物車
+function addCart(e) {
+  const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
+  const el = e.target.parentNode.parentNode.parentNode.parentNode;
+  const addCartNum = e.target.parentNode.querySelector('.cart-num-select');
+  const productId = el.getAttribute('id');
+  const quantity = parseInt(addCartNum.value);
+  const cart = {
+    productId,
+    quantity,
+  };
+  axios.post(api, { data: cart }).then(res => {
+    if (res.status === 200) {
+      cartData = res.data.carts;
+      renderCart(cartData);
+      addCartNum.value = 1;
+      console.log(res.data.finalTotal);
+    }
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+// 刪除全部購物車
+function removeAllCart() {
+  const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
+  axios.delete(api).then(res => {
+    if (res.status === 200) {
+      cartData = res.data.carts;
+      renderCart(cartData);
+    }
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+// 初始
 function init() {
-  getProducts();
-  enterAnimate.classList.add('active');  // 進網頁動畫
+  getProducts(); // 從伺服器取商品
+  getCarts(); // 從伺服器取購物車
+  enterAnimate.classList.add('active');  // 進網頁過場動畫
   setTimeout(() => {
     bannerTitle.classList.add('active');
     bannerTitleText.classList.add('active');
@@ -119,7 +202,8 @@ const swiper = new Swiper('.swiper-container', {
   },
 });
 
-const API_PATH = 'yunlew531';
+const api_path = 'yunlew531';
+const API = 'https://hexschoollivejs.herokuapp.com';
 const enterAnimate = document.querySelector('#enterAnimate');
 const bannerTitle = document.querySelector('#bannerTitle');
 const bannerTitleText = document.querySelector('#bannerTitle > h2');
@@ -129,6 +213,8 @@ const cardGroup = document.querySelector('#cardGroup');
 const productSearchInput = document.querySelector('#productSearchInput');
 const productSearchBtn = document.querySelector('#productSearchBtn');
 const categorySelect = document.querySelector('#categorySelect');
+const cartGroup = document.querySelector('#cartGroup');
+const removeAllBtn = document.querySelector('#removeAllBtn');
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
   text2: `2021 全新窩窩實木製系列產品`,
@@ -139,9 +225,8 @@ const bannerText = {
 }
 const bannerTitleArr = Object.values(bannerText);
 let data = [];
+let cartData = [];
 let categoryArr = [];
-
-
 
 init();
 
@@ -150,3 +235,5 @@ transportBtn.addEventListener('click', closeTransportPanel);
 productSearchBtn.addEventListener('click', filterProduct);
 productSearchInput.addEventListener('keyup', filterProduct);
 categorySelect.addEventListener('change', filterCategory);
+removeAllBtn.addEventListener('click', removeAllCart);
+
