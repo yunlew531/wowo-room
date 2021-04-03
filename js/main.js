@@ -32,8 +32,6 @@ function getProducts() {
     renderProducts(data);
     categoryArrHandler(); // 整理出種類不重複陣列
     renderProductsSelect(categoryArr); // 渲染種類選項
-    const addCartBtns = document.querySelectorAll('#productPanel .addCart-btn');
-    addCartBtns.forEach(addCartBtn => addCartBtn.addEventListener('click', addCart));
   }).catch(err => {
     console.log(err);
   })
@@ -135,6 +133,7 @@ function filterCategory(e) {
 
 // 加入購物車
 function addCart(e) {
+  if (e.target.className !== 'addCart-btn') return;
   const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
   const el = e.target.parentNode.parentNode.parentNode.parentNode;
   const addCartNum = e.target.parentNode.querySelector('.cart-num-select');
@@ -176,6 +175,8 @@ function init() {
   setTimeout(() => {
     bannerTitle.classList.add('active');
     bannerTitleText.classList.add('active');
+    middleImgAnimate.classList.add('active'); // 待放置scroll
+    environmentalWoodImg.classList.add('active')
     bannerTitleHandler(bannerTitleArr.length);
   }, 600);
 }
@@ -208,11 +209,13 @@ const bannerTitleText = document.querySelector('#bannerTitle > h2');
 const transportModeBtn = document.querySelector('#transportModeBtn');
 const transportBtn = document.querySelector('#transportBtn');
 const cardGroup = document.querySelector('#cardGroup');
+const cartGroup = document.querySelector('#cartGroup');
 const productSearchInput = document.querySelector('#productSearchInput');
 const productSearchBtn = document.querySelector('#productSearchBtn');
 const categorySelect = document.querySelector('#categorySelect');
-const cartGroup = document.querySelector('#cartGroup');
 const removeAllBtn = document.querySelector('#removeAllBtn');
+const middleImgAnimate = document.querySelector('#middleImgAnimate');
+const environmentalWoodImg = document.querySelector('#environmentalWoodImg');
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
   text2: `2021 全新窩窩實木製系列產品`,
@@ -234,4 +237,4 @@ productSearchBtn.addEventListener('click', filterProduct);
 productSearchInput.addEventListener('keyup', filterProduct);
 categorySelect.addEventListener('change', filterCategory);
 removeAllBtn.addEventListener('click', removeAllCart);
-
+cardGroup.addEventListener('click', addCart);

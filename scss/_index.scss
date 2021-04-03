@@ -279,6 +279,26 @@ body {
           margin-top: 35px;
           height: 600px;
           object-fit: cover;
+          position: relative;
+          z-index: -1;
+          overflow: hidden;
+          &::before {
+            content: "";
+            width: 200%;
+            height: 110%;
+            background: #000;
+            position: absolute;
+            transform: rotate(60deg);
+            // z-index: 1;
+            top: 0;
+            left: -200%;
+            transition: 1s ease-in-out;
+          }
+          &.active {
+            &::before {
+              left: 100%;
+            }
+          }
         }
         .side-img {
           height: 400px;
@@ -313,7 +333,6 @@ body {
           &:hover {
             color: #000;
             &::before {
-              // content: "";
               width: 100%;
             }
           }
@@ -322,59 +341,106 @@ body {
     }
 
     .product-introduce-panel {
-      @include flex(space-around);
-      max-width: 800px;
-      max-height: 450px;
+      @include flex(flex-end);
+      max-width: 1120px;
+      max-height: 550px;
       margin: 0 auto;
       object-fit: cover;
       padding: 0 20;
       margin-bottom: 200px;
-      position: relative;
+      overflow: hidden;
+      .middle-img {
+        display: flex;
+        position: relative;
+        .product-page {
+          @include flex(flex-end, center);
+          @include absolute(50%, 50%);
+          transform: translateX(-50%) translateY(-10%);
+          width: 500px;
+          height: 100px;
+          padding: 30px;
+          text-decoration: none;
+          transition: 0.3s ease;
+          font-size: $font-s;
+          color: #fff;
+          background: #bd9ba2;
+          z-index: 1;
+          opacity: 0;
+          span {
+            margin-right: 35%;
+          }
+          span,
+          i {
+            position: absolute;
+          }
+          &::before {
+            content: "";
+            @include absolute;
+            width: 0;
+            height: 95%;
+            transition: 0.3s ease;
+            background: #fff;
+          }
+          &:hover {
+            color: #bd9ba2;
+            &::before {
+              width: 100%;
+            }
+          }
+        }
+        &::before {
+          content: "";
+          width: 200%;
+          height: 200%;
+          background: #000;
+          transform: rotate(60deg);
+          position: absolute;
+          bottom: -150%;
+          left: -150%;
+          z-index: 2;
+          transition: 0.8s ease-in-out;
+        }
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          background: #fff;
+          position: absolute;
+          z-index: 0;
+          transition: 0.8s ease-in-out;
+        }
+        &.active {
+          &::before {
+            bottom: 50%;
+            left: 50%;
+          }
+          &::after {
+            z-index: -1;
+          }
+          .product-page {
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 1;
+          }
+        }
+      }
       .product-img {
         margin-right: 30px;
       }
       .left-side-img {
+        @include flex(null, center);
+        height: 550px;
         align-self: center;
-        height: 300px;
-        margin-right: 50px;
+        z-index: 3;
+        background: #fff;
+        > img {
+          height: 300px;
+        }
+        padding-right: 50px;
       }
       .right-side-img {
-        height: 400px;
-        margin-left: 20px;
-      }
-      .product-page {
-        @include flex(flex-end, center);
-        @include absolute(50%, 50%);
-        transform: translateX(-50%) translateY(-50%);
-        width: 500px;
-        height: 100px;
-        padding: 30px;
-        text-decoration: none;
-        transition: 0.3s ease;
-        font-size: $font-s;
-        color: #fff;
-        background: #bd9ba2;
-        span {
-          margin-right: 35%;
-        }
-        span,
-        i {
-          position: absolute;
-        }
-        &::before {
-          content: "";
-          @include absolute;
-          width: 0;
-          height: 95%;
-          transition: 0.3s ease;
-          background: #fff;
-        }
-        &:hover {
-          color: #bd9ba2;
-          &::before {
-            width: 100%;
-          }
-        }
+        padding-left: 60px;
+        background: #fff;
+        z-index: 3;
       }
     }
 
@@ -389,7 +455,6 @@ body {
         margin-bottom: 30px;
       }
       table {
-        // border-collapse: collapse;
         th {
           padding: 20px 40px;
           border-bottom: solid 1px #000;
