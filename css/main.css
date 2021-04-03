@@ -534,20 +534,30 @@ body {
 
 .index-swap .main .advantage-panel .environmental .environmental-wood-img::before {
   content: "";
-  width: 200%;
-  height: 110%;
+  width: 300%;
+  height: 175%;
   background: #000;
   position: absolute;
-  -webkit-transform: rotate(60deg);
-          transform: rotate(60deg);
-  top: 0;
-  left: -200%;
+  -webkit-transform: rotate(50deg);
+          transform: rotate(50deg);
+  z-index: 1;
+  top: -50%;
+  left: -320%;
   -webkit-transition: 1s ease-in-out;
   transition: 1s ease-in-out;
 }
 
-.index-swap .main .advantage-panel .environmental .environmental-wood-img.active::before {
-  left: 100%;
+.index-swap .main .advantage-panel .environmental .environmental-wood-img::after {
+  content: "";
+  background: #fff;
+  width: 100%;
+  height: 110%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
 }
 
 .index-swap .main .advantage-panel .environmental .side-img {
@@ -566,7 +576,7 @@ body {
           align-items: center;
   position: absolute;
   left: 50%;
-  bottom: 13%;
+  bottom: 5%;
   width: 500px;
   height: 100px;
   text-decoration: none;
@@ -578,6 +588,7 @@ body {
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
   font-size: 20px;
+  opacity: 0;
 }
 
 .index-swap .main .advantage-panel .environmental .more-information span {
@@ -607,6 +618,19 @@ body {
 
 .index-swap .main .advantage-panel .environmental .more-information:hover::before {
   width: 100%;
+}
+
+.index-swap .main .advantage-panel .environmental.active .environmental-wood-img::before {
+  left: 100%;
+}
+
+.index-swap .main .advantage-panel .environmental.active .environmental-wood-img::after {
+  z-index: -1;
+}
+
+.index-swap .main .advantage-panel .environmental.active .more-information {
+  opacity: 1;
+  bottom: 13%;
 }
 
 .index-swap .main .product-introduce-panel {
@@ -695,14 +719,14 @@ body {
   width: 200%;
   height: 200%;
   background: #000;
-  -webkit-transform: rotate(60deg);
-          transform: rotate(60deg);
+  -webkit-transform: rotate(50deg);
+          transform: rotate(50deg);
   position: absolute;
-  bottom: -150%;
-  left: -150%;
+  bottom: -50%;
+  left: -200%;
   z-index: 2;
-  -webkit-transition: 0.8s ease-in-out;
-  transition: 0.8s ease-in-out;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
 }
 
 .index-swap .main .product-introduce-panel .middle-img::after {
@@ -712,13 +736,12 @@ body {
   background: #fff;
   position: absolute;
   z-index: 0;
-  -webkit-transition: 0.8s ease-in-out;
-  transition: 0.8s ease-in-out;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
 }
 
 .index-swap .main .product-introduce-panel .middle-img.active::before {
-  bottom: 50%;
-  left: 50%;
+  left: 110%;
 }
 
 .index-swap .main .product-introduce-panel .middle-img.active::after {

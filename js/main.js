@@ -176,7 +176,7 @@ function init() {
     bannerTitle.classList.add('active');
     bannerTitleText.classList.add('active');
     middleImgAnimate.classList.add('active'); // 待放置scroll
-    environmentalWoodImg.classList.add('active')
+    environmental.classList.add('active')
     bannerTitleHandler(bannerTitleArr.length);
   }, 600);
 }
@@ -215,7 +215,7 @@ const productSearchBtn = document.querySelector('#productSearchBtn');
 const categorySelect = document.querySelector('#categorySelect');
 const removeAllBtn = document.querySelector('#removeAllBtn');
 const middleImgAnimate = document.querySelector('#middleImgAnimate');
-const environmentalWoodImg = document.querySelector('#environmentalWoodImg');
+const environmental = document.querySelector('#environmental');
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
   text2: `2021 全新窩窩實木製系列產品`,
