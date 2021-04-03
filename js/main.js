@@ -149,7 +149,6 @@ function addCart(e) {
       cartData = res.data.carts;
       renderCart(cartData);
       addCartNum.value = 1;
-      console.log(res.data.finalTotal);
     }
   }).catch(err => {
     console.log(err);
@@ -164,7 +163,6 @@ function removeAllCart() {
       cartData = res.data.carts;
       renderCart(cartData);
     }
-    console.log(res);
   }).catch(err => {
     console.log(err);
   })
