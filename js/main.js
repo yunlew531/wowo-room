@@ -86,9 +86,13 @@ function renderCart(arr) {
   let str = '';
   arr.forEach(cart => {
     str += `
-    <li id=${cart.id}>
-    <p>${cart.product.title}<span style="margin-left: 20px">${cart.quantity}</span><span style="margin-left: 20px">${cart.product.price}</span></p>
-    </li>
+      <tr data-id="${cart.id}">
+        <td><img src="${cart.product.images}" alt="${cart.product.title}">${cart.product.title}</td>
+        <td>${cart.product.origin_price}</td>
+        <td>${cart.quantity}</td>
+        <td>${cart.product.price}</td>
+        <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
+      </tr>
     `;
   })
   cartGroup.innerHTML = str;
@@ -144,10 +148,51 @@ function addCart(e) {
     quantity,
   };
   axios.post(api, { data: cart }).then(res => {
-    if (res.status === 200) {
+    if (res.data.status) {
       cartData = res.data.carts;
       renderCart(cartData);
       addCartNum.value = 1;
+      cartMessage.innerHTML = cartMessageHandler('addCartSuccess', 'success');
+    } else {
+      cartMessage.innerHTML = cartMessageHandler('addCartError', 'error');
+    }
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+// 購物車操作訊息
+function cartMessageHandler(text, status) {
+  const color = (status === 'success' ? 'rgb(110, 210, 110)' : '#e9afba');
+  const message = {
+    addCartSuccess: `成功加入購物車`,
+    addCartError: `加入失敗...!`,
+    removeCartSuccess: `成功移除物品`,
+    removeCartError: `沒有成功移除物品!`,
+  }
+  const content = `<li style="color: ${color};">${message[text]}</li>`
+  messageArr.push(content);
+  const str = messageArr.reduce((prev, text) => prev + text);
+  cartMessage.classList.add('active');
+  setTimeout(() => {
+    messageArr.splice(0, 1);
+    cartMessage.classList.remove('active');
+  }, 3000);
+  return str;
+}
+
+// 刪除單筆購物車
+function removeCart(e) {
+  if (e.target.parentNode.className !== 'remove-cart-btn') return;
+  const id = e.target.parentNode.parentNode.dataset.id;
+  const api = `${API}/api/livejs/v1/customer/${api_path}/carts/${id}`;
+  axios.delete(api).then(res => {
+    if (res.data.status) {
+      cartData = res.data.carts;
+      cartMessage.innerHTML = cartMessageHandler('removeCartSuccess', 'success');
+      renderCart(cartData);
+    } else {
+      cartMessage.innerHTML = cartMessageHandler('removeCartError', 'error');
     }
   }).catch(err => {
     console.log(err);
@@ -216,6 +261,7 @@ const categorySelect = document.querySelector('#categorySelect');
 const removeAllBtn = document.querySelector('#removeAllBtn');
 const middleImgAnimate = document.querySelector('#middleImgAnimate');
 const environmental = document.querySelector('#environmental');
+const cartMessage = document.querySelector('#cartMessage');
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
   text2: `2021 全新窩窩實木製系列產品`,
@@ -228,6 +274,7 @@ const bannerTitleArr = Object.values(bannerText);
 let data = [];
 let cartData = [];
 let categoryArr = [];
+let messageArr = [];
 
 init();
 
@@ -238,3 +285,4 @@ productSearchInput.addEventListener('keyup', filterProduct);
 categorySelect.addEventListener('change', filterCategory);
 removeAllBtn.addEventListener('click', removeAllCart);
 cardGroup.addEventListener('click', addCart);
+cartGroup.addEventListener('click', removeCart);

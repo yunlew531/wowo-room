@@ -87,42 +87,47 @@
         <div>
           <h2>家具比較</h2>
           <table>
-            <tr>
-              <th></th>
-              <th colspan="1">窩窩系統模組家具</th>
-              <th class="secondary">組合式家具</th>
-              <th class="secondary">實木家具</th>
-            </tr>
-            <tr>
-              <th>可單人自行組裝</th>
-              <td><i class="fas fa-check-circle"></i></td>
-              <td class="secondary">不一定</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>可多次重覆拆裝</th>
-              <td><i class="fas fa-check-circle"></i></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>床墊規格彈性大</th>
-              <td><i class="fas fa-check-circle"></i></td>
-              <td class="secondary">不一定</td>
-              <td class="secondary">不一定</td>
-            </tr>
-            <tr>
-              <th>材質可長久使用</th>
-              <td><i class="fas fa-check-circle"></i></td>
-              <td></td>
-              <td><i class="fas fa-check-circle"></i></td>
-            </tr>
-            <tr>
-              <th>小客車即可搬運</th>
-              <td><i class="fas fa-check-circle"></i></td>
-              <td></td>
-              <td></td>
-            </tr>
+            <thead>
+              <tr>
+                <th></th>
+                <th colspan="1">窩窩系統模組家具</th>
+                <th class="secondary">組合式家具</th>
+                <th class="secondary">實木家具</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th>可單人自行組裝</th>
+                <td><i class="fas fa-check-circle"></i></td>
+                <td class="secondary">不一定</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>可多次重覆拆裝</th>
+                <td><i class="fas fa-check-circle"></i></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>床墊規格彈性大</th>
+                <td><i class="fas fa-check-circle"></i></td>
+                <td class="secondary">不一定</td>
+                <td class="secondary">不一定</td>
+              </tr>
+              <tr>
+                <th>材質可長久使用</th>
+                <td><i class="fas fa-check-circle"></i></td>
+                <td></td>
+                <td><i class="fas fa-check-circle"></i></td>
+              </tr>
+              <tr>
+                <th>小客車即可搬運</th>
+                <td><i class="fas fa-check-circle"></i></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>
@@ -258,12 +263,39 @@
       </section>
 
       <section id="cartPanel" class="cart-panel">
-        <h3>購物車</h3>
-        <ul id="cartGroup">
-          <li></li>
+        <ul id="cartMessage" class="cart-message">
+          <!-- <li style="color: black;">訊息</li> -->
         </ul>
-        <button id="removeAllBtn" class="removeAll-btn">全刪</button>
+        <h3>購物車</h3>
+        <div>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th width="40%">品項</th>
+                <th width="15%">單價</th>
+                <th width="15%">數量</th>
+                <th width="15%">金額</th>
+                <th width="50px"></th>
+              </tr>
+            </thead>
 
+            <tbody id="cartGroup">
+              <!-- <template id="cartGroup"> -->
+              <tr>
+                <td>Antony 雙人床架／雙人加大</td>
+                <td>NT$12,000</td>
+                <td>1</td>
+                <td>NT$12,000</td>
+                <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
+              </tr>
+              <!-- </template> -->
+            </tbody>
+          </table>
+          <div class="cart-footer">
+            <button id="removeAllBtn" class="removeAll-btn">刪除所有品項</button>
+            <p>總金額: <span>NT $1930</span></p>
+          </div>
+        </div>
       </section>
     </main>
 
