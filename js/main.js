@@ -137,6 +137,7 @@ function filterCategory(e) {
 
 // 加入購物車
 function addCart(e) {
+  e.preventDefault();
   if (e.target.className !== 'addCart-btn') return;
   const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
   const el = e.target.parentNode.parentNode.parentNode.parentNode;
@@ -152,9 +153,9 @@ function addCart(e) {
       cartData = res.data.carts;
       renderCart(cartData);
       addCartNum.value = 1;
-      cartMessage.innerHTML = cartMessageHandler('addCartSuccess', 'success');
+      cartMessageHandler('addCartSuccess');
     } else {
-      cartMessage.innerHTML = cartMessageHandler('addCartError', 'error');
+      cartMessageHandler('addCartError');
     }
   }).catch(err => {
     console.log(err);
@@ -162,23 +163,22 @@ function addCart(e) {
 }
 
 // 購物車操作訊息
-function cartMessageHandler(text, status) {
-  const color = (status === 'success' ? 'rgb(110, 210, 110)' : '#e9afba');
+function cartMessageHandler(text) {
   const message = {
-    addCartSuccess: `成功加入購物車`,
-    addCartError: `加入失敗...!`,
-    removeCartSuccess: `成功移除物品`,
-    removeCartError: `沒有成功移除物品!`,
+    addCartSuccess: { text: '成功加入購物車', color: '#6ed26e' },
+    addCartError: { text: '加入失敗...!', color: '#e9afba' },
+    removeCartSuccess: { text: '成功移除物品', color: '#6ed26e' },
+    removeCartError: { text: '沒有成功移除物品!', color: '#e9afba' },
   }
-  const content = `<li style="color: ${color};">${message[text]}</li>`
+  const content = `<li style="color: ${message[text].color};">${message[text].text}</li>`
   messageArr.push(content);
-  const str = messageArr.reduce((prev, text) => prev + text);
-  cartMessage.classList.add('active');
+  let str = messageArr.reduce((prev, text) => prev + text);
+  cartMessage.innerHTML = str;
   setTimeout(() => {
     messageArr.splice(0, 1);
-    cartMessage.classList.remove('active');
-  }, 3000);
-  return str;
+    str = (messageArr.length === 0 ? '' : messageArr.reduce((prev, text) => prev + text));
+    cartMessage.innerHTML = str;
+  }, 5000);
 }
 
 // 刪除單筆購物車
@@ -189,10 +189,10 @@ function removeCart(e) {
   axios.delete(api).then(res => {
     if (res.data.status) {
       cartData = res.data.carts;
-      cartMessage.innerHTML = cartMessageHandler('removeCartSuccess', 'success');
+      cartMessageHandler('removeCartSuccess');
       renderCart(cartData);
     } else {
-      cartMessage.innerHTML = cartMessageHandler('removeCartError', 'error');
+      cartMessageHandler('removeCartError');
     }
   }).catch(err => {
     console.log(err);
@@ -203,25 +203,70 @@ function removeCart(e) {
 function removeAllCart() {
   const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
   axios.delete(api).then(res => {
-    if (res.status === 200) {
+    console.log(res);
+    if (res.status) {
       cartData = res.data.carts;
       renderCart(cartData);
+      cartMessageHandler('removeCartSuccess');
     }
   }).catch(err => {
     console.log(err);
   })
 }
 
+// 動畫控制
+function animateHandler() {
+  console.log(window.scrollY);
+  if (window.scrollY > 300 && window.scrollY < 1500) {
+    environmental.classList.add('active')
+    setTimeout(() => {
+      moreInformationBtn.classList.add('active');
+    }, 800);
+    setTimeout(() => {
+      textDom[2].classList.add('active');
+    }, 1000)
+  }
+  if (window.scrollY > 1100 && window.scrollY < 2270) {
+    middleImgAnimate.classList.add('active');
+    setTimeout(() => {
+      productPageBtn.classList.add('active');
+    }, 800);
+  }
+  if (window.scrollY > 1900 && window.scrollY < 3000)
+    comparedPanel.classList.add('active');
+  if (window.scrollY > 2446 && window.scrollY < 3650) {
+    let time = 500;
+    setTimeout(() => {
+      commentCards[0].classList.add('active');
+    }, 0);
+    setTimeout(() => {
+      commentCards[1].classList.add('active');
+    }, time);
+    setTimeout(() => {
+      commentCards[2].classList.add('active');
+    }, time * 2);
+    setTimeout(() => {
+      commentCards[3].classList.add('active');
+    }, time * 3);
+    setTimeout(() => {
+      commentCards[4].classList.add('active');
+    }, time * 4);
+    setTimeout(() => {
+      commentCards[5].classList.add('active');
+    }, time * 5);
+  }
+  if (window.scrollY > 3200)
+    productPanelTitle.classList.add('active');
+}
+
 // 初始
 function init() {
-  getProducts(); // 從伺服器取商品
-  getCarts(); // 從伺服器取購物車
+  // getProducts(); // 從伺服器取商品
+  // getCarts(); // 從伺服器取購物車
   enterAnimate.classList.add('active');  // 進網頁過場動畫
   setTimeout(() => {
     bannerTitle.classList.add('active');
     bannerTitleText.classList.add('active');
-    middleImgAnimate.classList.add('active'); // 待放置scroll
-    environmental.classList.add('active')
     bannerTitleHandler(bannerTitleArr.length);
   }, 600);
 }
@@ -262,6 +307,13 @@ const removeAllBtn = document.querySelector('#removeAllBtn');
 const middleImgAnimate = document.querySelector('#middleImgAnimate');
 const environmental = document.querySelector('#environmental');
 const cartMessage = document.querySelector('#cartMessage');
+const comparedPanel = document.querySelector('#comparedPanel');
+const moreInformationBtn = document.querySelector('.more-information-btn');
+const productPageBtn = document.querySelector('.product-page-btn');
+const commentCards = document.querySelectorAll('#commentPanel .card');
+const productPanelTitle = document.querySelector('#productPanel > h2');
+const textDom = document.querySelectorAll('.textDom');
+const body = document.body;
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
   text2: `2021 全新窩窩實木製系列產品`,
@@ -286,3 +338,6 @@ categorySelect.addEventListener('change', filterCategory);
 removeAllBtn.addEventListener('click', removeAllCart);
 cardGroup.addEventListener('click', addCart);
 cartGroup.addEventListener('click', removeCart);
+window.addEventListener('scroll', animateHandler);
+
+console.log(textDom);

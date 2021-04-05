@@ -8,7 +8,8 @@ body {
   position: fixed;
   z-index: 11;
   transform: skewX(18deg);
-  transition: 0.5s ease-in;
+  // transition: 0.5s cubic-bezier(0.36, 0.6, 0.14, -0.13);
+  transition: 0.5s cubic-bezier(1, 0.57, 0, 0.33);
   left: -10%;
   &.active {
     width: 0;
@@ -163,7 +164,6 @@ body {
               &:hover {
                 color: #000;
                 &::before {
-                  // content: "";
                   width: 100%;
                 }
               }
@@ -263,16 +263,26 @@ body {
         position: relative;
         .environmental-text {
           @include absolute(null, 60px);
+          width: 800px;
+          height: 100%;
+
           h2 {
             font-size: $font-xxl;
             margin-bottom: 50px;
             line-height: 1.3;
+            position: absolute;
           }
           P {
-            max-width: 600px;
+            width: 600px;
             font-size: $font-m;
             margin-right: 700px;
             line-height: 1.5;
+            opacity: 0;
+            transition: 1s;
+            margin-top: 250px;
+            &.active {
+              opacity: 1;
+            }
           }
         }
         .environmental-wood-img {
@@ -284,15 +294,15 @@ body {
           overflow: hidden;
           &::before {
             content: "";
-            width: 300%;
-            height: 175%;
+            width: 230%;
+            height: 110%;
+            top: 0;
+            left: -300%;
             background: #000;
             position: absolute;
-            transform: rotate(50deg);
+            transform: skew(50deg);
             z-index: 1;
-            top: -50%;
-            left: -320%;
-            transition: 1s ease-in-out;
+            transition: 0.8s cubic-bezier(0, 0.11, 1, 0.9);
           }
           &::after {
             content: "";
@@ -303,13 +313,13 @@ body {
             top: 0;
             left: 0;
             z-index: 0;
-            transition: 1s ease-in-out;
+            transition: 0.8s ease-in-out;
           }
         }
         .side-img {
           height: 400px;
         }
-        .more-information {
+        .more-information-btn {
           @include flex(flex-end, center);
           @include absolute(null, 50%, 5%);
           width: 500px;
@@ -343,19 +353,19 @@ body {
               width: 100%;
             }
           }
+          &.active {
+            opacity: 1;
+            bottom: 13%;
+          }
         }
         &.active {
           .environmental-wood-img {
             &::before {
-              left: 100%;
+              left: 180%;
             }
             &::after {
               z-index: -1;
             }
-          }
-          .more-information {
-            opacity: 1;
-            bottom: 13%;
           }
         }
       }
@@ -373,7 +383,7 @@ body {
       .middle-img {
         display: flex;
         position: relative;
-        .product-page {
+        .product-page-btn {
           @include flex(flex-end, center);
           @include absolute(50%, 50%);
           transform: translateX(-50%) translateY(-10%);
@@ -408,18 +418,21 @@ body {
               width: 100%;
             }
           }
+          &.active {
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 1;
+          }
         }
         &::before {
           content: "";
           width: 200%;
-          height: 200%;
+          height: 100%;
           background: #000;
-          transform: rotate(50deg);
+          transform: skew(50deg);
           position: absolute;
-          bottom: -50%;
-          left: -200%;
+          left: -245%;
           z-index: 2;
-          transition: 1s ease-in-out;
+          transition: 0.8s cubic-bezier(0, 0.11, 1, 0.9);
         }
         &::after {
           content: "";
@@ -428,18 +441,14 @@ body {
           background: #fff;
           position: absolute;
           z-index: 0;
-          transition: 1s ease-in-out;
+          transition: 0.8s ease-in-out;
         }
         &.active {
           &::before {
-            left: 110%;
+            left: 145%;
           }
           &::after {
             z-index: -1;
-          }
-          .product-page {
-            transform: translateX(-50%) translateY(-50%);
-            opacity: 1;
           }
         }
       }
@@ -466,15 +475,22 @@ body {
 
     .compared-panel {
       @include flex(center);
+      height: 660px;
       background: #f8f8f8;
       padding: 100px 20px;
       text-align: center;
       margin-bottom: 100px;
+      position: relative;
       h2 {
         font-size: $font-m;
         margin-bottom: 30px;
       }
       table {
+        overflow: hidden;
+        position: absolute;
+        transform: skewX(30deg);
+        transition: 1.5s cubic-bezier(1, 1.95, 0.3, 0.75);
+        left: -100%;
         th {
           padding: 20px 40px;
           border-bottom: solid 1px #000;
@@ -490,6 +506,12 @@ body {
       .fas {
         color: #9c77ff;
         font-size: $font-l;
+      }
+      &.active {
+        table {
+          left: 31%;
+          transform: skew(0);
+        }
       }
     }
 
@@ -518,8 +540,15 @@ body {
           margin: 0 20px 20px 0;
           box-shadow: 3px 3px 5px gray;
           border-radius: 5px;
+          visibility: 0;
+          opacity: 0;
+          transition: 1s ease-out;
           .card-content {
             padding: 10px;
+          }
+          &.active {
+            opacity: 1;
+            // visibility: 1;
           }
         }
         .card-head {
@@ -540,15 +569,24 @@ body {
       background: #f8f8f5;
       margin: 0 auto 200px;
       padding: 60px 30px;
+      position: relative;
       h2 {
         font-size: $font-l;
         text-align: center;
-        margin-bottom: 30px;
+        position: absolute;
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: 0.5s cubic-bezier(1, 1.87, 0.2, 1.38);
+        &.active {
+          top: 50px;
+          left: 50%;
+        }
       }
       .search-group {
         position: relative;
         @include flex(space-between, center);
-        margin-bottom: 50px;
+        margin: 100px 0 50px;
         select,
         input {
           width: 230px;
@@ -568,9 +606,11 @@ body {
           border: 0;
           &:hover {
             color: #fff;
+            transform: scale(1.01);
           }
           &:active {
             background: rgb(46, 46, 46);
+            transform: scale(1);
           }
         }
       }
@@ -623,9 +663,11 @@ body {
                   color: #000;
                   background: #fff;
                   border: 1px solid #000;
+                  transform: scale(1.01);
                 }
                 &:active {
-                  background: rgb(236, 236, 236);
+                  background: rgb(216, 216, 216);
+                  transform: scale(1);
                 }
               }
               .cart-num-select {
@@ -685,22 +727,18 @@ body {
         }
       }
       .cart-message {
-        top: 100px;
-        right: 0;
-        display: none;
+        top: 30px;
+        right: 30px;
         position: fixed;
+        z-index: 5;
         li {
           @include flex(center, center);
           background: wheat;
           width: 200px;
           height: 50px;
           color: whitesmoke;
-          border-radius: 10px 0 0 10px;
-          visibility: 0;
+          border-radius: 20px;
           margin-bottom: 20px;
-        }
-        &.active {
-          display: block;
         }
       }
       .cart-footer {
