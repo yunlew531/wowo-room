@@ -210,8 +210,10 @@ function removeAllCart() {
       renderCart(cartData);
       cartMessageHandler('removeCartSuccess');
     }
-  }).catch(() => {
+  }).catch((err) => {
     cartMessageHandler('removeCartError');
+    console.log(`這是catch`);
+    console.log(err);
   })
 }
 
@@ -232,7 +234,7 @@ function orderSubmit() {
     cartMessageHandler('orderSubmitSuccess');
     renderCart(cartData);
   }).catch(err => {
-    console.log(err);
+    // console.log(err);
     cartMessageHandler('orderSubmitError');
   });
 }
