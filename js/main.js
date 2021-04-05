@@ -162,13 +162,15 @@ function addCart(e) {
   })
 }
 
-// 購物車操作訊息
+// 購物車、訂單操作訊息
 function cartMessageHandler(text) {
   const message = {
     addCartSuccess: { text: '成功加入購物車', color: '#6ed26e' },
     addCartError: { text: '加入失敗...!', color: '#e9afba' },
     removeCartSuccess: { text: '成功移除物品', color: '#6ed26e' },
     removeCartError: { text: '沒有成功移除物品!', color: '#e9afba' },
+    orderSubmitSuccess: { text: '成功送出訂單!', color: '#6ed26e' },
+    orderSubmitError: { text: '訂單送出失敗!', color: '#e9afba' },
   }
   const content = `<li style="color: ${message[text].color};">${message[text].text}</li>`
   messageArr.push(content);
@@ -203,7 +205,6 @@ function removeCart(e) {
 function removeAllCart() {
   const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
   axios.delete(api).then(res => {
-    console.log(res);
     if (res.status) {
       cartData = res.data.carts;
       renderCart(cartData);
@@ -214,11 +215,47 @@ function removeAllCart() {
   })
 }
 
+// 送出訂單
+function orderSubmit() {
+  const api = `${API}/api/livejs/v1/customer/${api_path}/orders`;
+  const user = {
+    name: nameDom.value,
+    tel: tel.value,
+    email: email.value,
+    address: address.value,
+    payment: payment.value
+  }
+  const hasError = validate(user);
+  if (hasError) return;
+  axios.post(api, { data: { user } }).then(res => {
+    console.log(res.data);
+    cartMessageHandler('orderSubmitSuccess');
+    renderCart(cartData);
+  }).catch(err => {
+    console.log(err);
+    cartMessageHandler('orderSubmitError');
+  });
+}
+
+// 表單驗證
+function validate(user) {
+  const arr = Object.values(user);
+  const isEmpty = arr.some(value => !value);
+  inputGroup.forEach(input => {
+    const el = input.parentNode.querySelector('.alert-message');
+    if (!input.value)
+      el.textContent = `必填!`;
+    else
+      el.textContent = '';
+  })
+  return isEmpty;
+}
+
 // 動畫控制
 function animateHandler() {
-  console.log(window.scrollY);
   if (window.scrollY > 300 && window.scrollY < 1500) {
     environmental.classList.add('active')
+    textDom[0].classList.add('active');
     setTimeout(() => {
       moreInformationBtn.classList.add('active');
     }, 800);
@@ -261,8 +298,8 @@ function animateHandler() {
 
 // 初始
 function init() {
-  // getProducts(); // 從伺服器取商品
-  // getCarts(); // 從伺服器取購物車
+  getProducts(); // 從伺服器取商品
+  getCarts(); // 從伺服器取購物車
   enterAnimate.classList.add('active');  // 進網頁過場動畫
   setTimeout(() => {
     bannerTitle.classList.add('active');
@@ -313,6 +350,13 @@ const productPageBtn = document.querySelector('.product-page-btn');
 const commentCards = document.querySelectorAll('#commentPanel .card');
 const productPanelTitle = document.querySelector('#productPanel > h2');
 const textDom = document.querySelectorAll('.textDom');
+const nameDom = document.querySelector('#name');
+const tel = document.querySelector('#tel');
+const email = document.querySelector('#email');
+const address = document.querySelector('#address');
+const payment = document.querySelector('#payment');
+const inputGroup = document.querySelectorAll('[data-use="validate"]');
+const submitBtn = document.querySelector('.submit-btn');
 const body = document.body;
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,
@@ -339,5 +383,4 @@ removeAllBtn.addEventListener('click', removeAllCart);
 cardGroup.addEventListener('click', addCart);
 cartGroup.addEventListener('click', removeCart);
 window.addEventListener('scroll', animateHandler);
-
-console.log(textDom);
+submitBtn.addEventListener('click', orderSubmit);

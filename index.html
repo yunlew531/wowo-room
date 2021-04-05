@@ -301,6 +301,46 @@
         </div>
       </section>
 
+      <section class="order-panel">
+        <div class="order-content">
+          <h2>填寫預訂資料</h2>
+          <div class="input-group">
+            <label for="name">姓名</label>
+            <br>
+            <input id="name" type="text" data-use="validate" placeholder="請輸入姓名">
+            <span class="alert-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="tel">電話</label>
+            <br>
+            <input id="tel" type="text" data-use="validate" placeholder="請輸入電話">
+            <span class="alert-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <br>
+            <input id="email" type="text" data-use="validate" placeholder="請輸入 Email">
+            <span class="alert-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="address">寄送地址</label>
+            <br>
+            <input id="address" type="text" data-use="validate" placeholder="請輸入寄送地址">
+            <span class="alert-message"></span>
+          </div>
+          <div class="input-group">
+            <label for="tradeType">交易方式</label>
+            <br>
+            <select id="payment" data-use="validate">
+              <option value="ATM">ATM</option>
+              <option value="Apple pay">Apple pay</option>
+            </select>
+            <span class="alert-message"></span>
+          </div>
+          <button class="submit-btn">送出預訂資料</button>
+        </div>
+
+      </section>
 
     </main>
 
