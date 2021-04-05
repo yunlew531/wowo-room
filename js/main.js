@@ -210,8 +210,8 @@ function removeAllCart() {
       renderCart(cartData);
       cartMessageHandler('removeCartSuccess');
     }
-  }).catch(err => {
-    console.log(err);
+  }).catch(() => {
+    cartMessageHandler('removeCartError');
   })
 }
 
