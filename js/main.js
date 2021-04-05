@@ -84,6 +84,7 @@ function renderProducts(arr) {
 // 渲染購物車
 function renderCart(arr) {
   let str = '';
+  let totalPrice = 0;
   arr.forEach(cart => {
     str += `
       <tr data-id="${cart.id}">
@@ -94,8 +95,10 @@ function renderCart(arr) {
         <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
       </tr>
     `;
+    totalPrice += cart.product.price * cart.quantity;
   })
   cartGroup.innerHTML = str;
+  totalPriceDom.textContent = `NT $${totalPrice}`;
 }
 
 // 依輸入框過濾商品卡片
@@ -230,11 +233,10 @@ function orderSubmit() {
   const hasError = validate(user);
   if (hasError) return;
   axios.post(api, { data: { user } }).then(res => {
-    console.log(res.data);
     cartMessageHandler('orderSubmitSuccess');
-    renderCart(cartData);
-  }).catch(err => {
-    // console.log(err);
+    getCarts();
+    submitForm.reset();
+  }).catch(() => {
     cartMessageHandler('orderSubmitError');
   });
 }
@@ -359,6 +361,8 @@ const address = document.querySelector('#address');
 const payment = document.querySelector('#payment');
 const inputGroup = document.querySelectorAll('[data-use="validate"]');
 const submitBtn = document.querySelector('.submit-btn');
+const totalPriceDom = document.querySelector('#totalPrice');
+const submitForm = document.querySelector('#submitForm');
 const body = document.body;
 const bannerText = {
   text1: `窩窩家居 跟您一起品味生活`,

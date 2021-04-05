@@ -126,6 +126,207 @@ img {
           box-sizing: border-box;
 }
 
+.backend-swap .header .black-line {
+  height: 40px;
+  background: #000;
+}
+
+.backend-swap .header .header-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 1110px;
+  margin: 0 auto;
+  height: 100px;
+  padding: 25px 50px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.backend-swap .header .header-content a {
+  text-decoration: none;
+  color: #000;
+}
+
+.backend-swap .header .header-content .header-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  font-size: 16px;
+}
+
+.backend-swap .header .header-content .header-nav li {
+  padding-bottom: 3px;
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+  position: relative;
+  margin-right: 50px;
+}
+
+.backend-swap .header .header-content .header-nav li::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: 0;
+  width: 0;
+  border-bottom: 2px solid #000;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.backend-swap .header .header-content .header-nav li:hover a {
+  color: rgba(0, 0, 0, 0.884);
+}
+
+.backend-swap .header .header-content .header-nav li:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.backend-swap .header .header-content .header-nav :last-child {
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.backend-swap .header .header-content .header-nav :last-child::before {
+  content: "";
+  border-bottom: 2px solid #6a33f8;
+}
+
+.backend-swap .header .header-content .header-nav :last-child:hover a {
+  color: #6b33f8dc;
+}
+
+.backend-swap .header .header-content .header-nav :last-child a {
+  color: #6a33f8;
+}
+
+.backend-swap .header .header-content .black-line {
+  width: 100%;
+}
+
+.backend-swap .chart-panel {
+  max-width: 1110px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.backend-swap .chart-panel h2 {
+  font-size: 28px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.backend-swap .order-panel {
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+.backend-swap .order-panel .order-head {
+  text-align: end;
+}
+
+.backend-swap .order-panel .order-head .removeAllOrder-btn {
+  width: 130px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 30px;
+  border: 2px solid black;
+  background: #fff;
+}
+
+.backend-swap .order-panel .order-head .removeAllOrder-btn:hover {
+  background: #e2e2e2;
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+.backend-swap .order-panel .order-head .removeAllOrder-btn:active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.backend-swap .order-panel .order-content {
+  width: 100%;
+  margin-bottom: 108px;
+}
+
+.backend-swap .order-panel .order-content td,
+.backend-swap .order-panel .order-content th {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  line-height: 1.5;
+  padding: 10px;
+}
+
+.backend-swap .order-panel .order-content .paid-status {
+  background: #f0f0f0;
+}
+
+.backend-swap .order-panel .order-content .paid-status.active {
+  background: #95ffca;
+}
+
+.backend-swap .order-panel .order-content .removeOrder-btn {
+  text-align: center;
+  font-size: 24px;
+  color: red;
+}
+
+.backend-swap .order-panel .order-content .removeOrder-btn:hover {
+  color: #e40000;
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.backend-swap .order-panel .order-content .removeOrder-btn:active {
+  color: #c20000;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.backend-swap .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 76px;
+  background: #000;
+  padding: 0 25px;
+  color: #acacac;
+}
+
+.backend-swap .footer a {
+  color: #acacac;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.backend-swap .footer a:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
 body {
   font-family: "Geeza Pro";
 }

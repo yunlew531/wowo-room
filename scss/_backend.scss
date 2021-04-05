@@ -1,0 +1,149 @@
+.backend-swap {
+  .header {
+    .black-line {
+      height: 40px;
+      background: #000;
+    }
+    .header-content {
+      @include flex(space-between, center);
+      max-width: 1110px;
+      margin: 0 auto;
+      height: 100px;
+      padding: 25px 50px;
+      font-size: $font-m;
+      font-weight: bold;
+      a {
+        text-decoration: none;
+        color: $mainColor;
+      }
+      .header-nav {
+        @include flex(space-between, center);
+        height: 100%;
+        font-size: $font-xs;
+        li {
+          padding-bottom: 3px;
+          transition: 1s ease;
+          position: relative;
+          margin-right: 50px;
+          &::before {
+            content: "";
+            @include absolute(null, null, -3px, 0);
+            width: 0;
+            border-bottom: 2px solid $mainColor;
+            transition: 0.3s ease;
+          }
+          &:hover {
+            a {
+              color: rgba(0, 0, 0, 0.884);
+            }
+            &::before {
+              width: 100%;
+              left: 0;
+            }
+          }
+        }
+        :last-child {
+          transition: 0.2s ease;
+          &::before {
+            content: "";
+            border-bottom: 2px solid #6a33f8;
+          }
+          &:hover {
+            a {
+              color: #6b33f8dc;
+            }
+          }
+          a {
+            color: #6a33f8;
+          }
+        }
+      }
+      .black-line {
+        width: 100%;
+      }
+    }
+  }
+
+  .chart-panel {
+    max-width: 1110px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    h2 {
+      font-size: $font-l;
+      margin-top: 50px;
+      text-align: center;
+    }
+  }
+
+  .order-panel {
+    max-width: 1110px;
+    margin: 0 auto;
+    .order-head {
+      text-align: end;
+      .removeAllOrder-btn {
+        width: 130px;
+        height: 40px;
+        border-radius: 20px;
+        font-size: $font-xs;
+        color: #000;
+        margin-bottom: 30px;
+        border: 2px solid rgb(0, 0, 0);
+        background: #fff;
+        &:hover {
+          background: rgb(226, 226, 226);
+          transform: scale(1.01);
+        }
+        &:active {
+          transform: scale(1);
+        }
+      }
+    }
+    .order-content {
+      width: 100%;
+      margin-bottom: 108px;
+      td,
+      th {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        line-height: 1.5;
+        padding: 10px;
+      }
+      .paid-status {
+        background: rgb(240, 240, 240);
+        &.active {
+          background: rgb(149, 255, 202);
+        }
+      }
+      .removeOrder-btn {
+        text-align: center;
+        font-size: $font-m;
+        color: red;
+        &:hover {
+          color: rgb(228, 0, 0);
+          transform: scale(1.02);
+        }
+        &:active {
+          color: rgb(194, 0, 0);
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  .footer {
+    @include flex(space-around, center);
+    height: 76px;
+    background: #000;
+    padding: 0 25px;
+    color: $secondary;
+    a {
+      color: $secondary;
+      text-decoration: none;
+      font-size: $font-m;
+      font-weight: bold;
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+}
