@@ -540,9 +540,13 @@ body {
         text-align: center;
       }
       .card-group {
-        @include flex(flex-end);
+        @include flex(center);
         flex-wrap: wrap;
         max-width: 1120px;
+        > :nth-child(1) {
+          width: 160px;
+          opacity: 0;
+        }
         .card {
           @include flex;
           height: 96px;

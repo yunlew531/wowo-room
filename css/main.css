@@ -1131,12 +1131,17 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   max-width: 1120px;
+}
+
+.index-swap .main .comment-panel .card-group > :nth-child(1) {
+  width: 160px;
+  opacity: 0;
 }
 
 .index-swap .main .comment-panel .card-group .card {
