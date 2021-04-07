@@ -1,4 +1,22 @@
 .backend-swap {
+  position: relative;
+  .login {
+    display: none;
+    @include absolute(70px, 60%);
+    width: 300px;
+    height: 40px;
+    background: rgb(236, 236, 236);
+    padding: 10px;
+    z-index: 5;
+    border-radius: 5px;
+    input {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    &.active {
+      @include flex(space-around, center);
+    }
+  }
   .header {
     .black-line {
       height: 40px;

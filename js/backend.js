@@ -10,7 +10,8 @@ function getOrders() {
     const orderPieChartArr = c3jsHandler();
     renderOrderPieChart(orderPieChartArr);
   }).catch(err => {
-    console.log(err);
+    console.log(err.response);
+    alert('你無此權限! 資料無法正常顯示! 請重新登入');
   });
 }
 
@@ -20,7 +21,7 @@ function removeAllOrder() {
     ordersData = res.data.orders;
     renderOrders();
   }).catch(err => {
-    console.log(err);
+    console.log(err.response);
   });
 }
 
@@ -32,7 +33,7 @@ function removeOrder(e) {
     ordersData = res.data.orders;
     renderOrders();
   }).catch(err => {
-    console.log(err);
+    console.log(err.response);
   });
 }
 
@@ -87,7 +88,7 @@ function orderEdit(e) {
     ordersData = res.data.orders;
     renderOrders();
   }).catch(err => {
-    console.log(err);
+    console.log(err.response);
   })
 }
 
@@ -129,24 +130,36 @@ function renderOrderPieChart(arr) {
   });
 }
 
+function showLoginPanel() {
+  loginDom.classList.toggle('active');
+}
+
+function loginHandler() {
+  KEY = adminKey.value;
+  loginDom.classList.remove('active');
+  getOrders();
+}
+
 function init() {
   getOrders();
 }
 
 let ordersData = [];
-// const KEY = ''; // 管理員金鑰
-const KEY = ''; // 管理員金鑰
+let KEY = ''; // 管理員金鑰
 const api_path = 'yunlew531';
 const API = 'https://hexschoollivejs.herokuapp.com';
 const orderList = document.querySelector('#orderList');
 const removeAllOrderBtn = document.querySelector('.removeAllOrder-btn');
 const paidStatus = document.querySelector('#orderList .paid-status');
 const removeOrderBtn = document.querySelector('.removeOrder-btn > i');
-
+const loginPanelBtn = document.querySelector('.loginPanel-btn');
+const loginDom = document.querySelector('.login');
+const adminKey = document.querySelector('#adminKey');
+const loginBtn = document.querySelector('.login-btn');
 init();
 
 orderList.addEventListener('change', orderEdit);
 removeAllOrderBtn.addEventListener('click', removeAllOrder);
 orderList.addEventListener('click', removeOrder);
-
-if (!KEY) alert('你無此權限! 資料無法正常顯示!')
+loginPanelBtn.addEventListener('click', showLoginPanel);
+loginBtn.addEventListener('click', loginHandler)
