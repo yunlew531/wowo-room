@@ -53,7 +53,7 @@ function renderProducts(arr) {
   let str = ''
   arr.forEach(item => {
     const content = `
-      <li id="${item.id}" class="card">
+      <li data-id="${item.id}" class="card">
         <a class="card-header" href="javascript:void(0)">
           <img src="${item.images}" alt="">
           <div class="card-content">
@@ -85,12 +85,23 @@ function renderProducts(arr) {
 function renderCart(arr) {
   let str = '';
   let totalPrice = 0;
+
   arr.forEach(cart => {
+    let optionStr = '';
+    for (let i = 0; i < 10; i++) {
+      const selected = (i + 1 === cart.quantity ? 'SELECTED ' : '');
+      const content = `<option value="${i + 1}" ${selected}>${i + 1}</option>`;
+      optionStr += content;
+    }
     str += `
       <tr data-id="${cart.id}">
         <td><img src="${cart.product.images}" alt="${cart.product.title}">${cart.product.title}</td>
         <td>${cart.product.origin_price}</td>
-        <td>${cart.quantity}</td>
+        <td>
+          <select>
+            ${optionStr}
+          </select>
+        </td>
         <td>${cart.product.price}</td>
         <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
       </tr>
@@ -145,7 +156,7 @@ function addCart(e) {
   const api = `${API}/api/livejs/v1/customer/${api_path}/carts`;
   const el = e.target.parentNode.parentNode.parentNode.parentNode;
   const addCartNum = e.target.parentNode.querySelector('.cart-num-select');
-  const productId = el.getAttribute('id');
+  const productId = el.dataset.id;
   const quantity = parseInt(addCartNum.value);
   const cart = {
     productId,
@@ -174,6 +185,8 @@ function cartMessageHandler(text) {
     removeCartError: { text: '沒有成功移除物品!', color: '#e9afba' },
     orderSubmitSuccess: { text: '成功送出訂單!', color: '#6ed26e' },
     orderSubmitError: { text: '訂單送出失敗!', color: '#e9afba' },
+    editCartSuccess: { text: '購物車更新!', color: '#6ed26e' },
+    editCartError: { text: '購物車更新失敗!', color: '#e9afba' },
   }
   const content = `<li style="color: ${message[text].color};">${message[text].text}</li>`
   messageArr.push(content);
@@ -215,8 +228,24 @@ function removeAllCart() {
     }
   }).catch((err) => {
     cartMessageHandler('removeCartError');
-    console.log(`這是catch`);
     console.log(err);
+  })
+}
+
+// 修改購物車數量
+function editCartNum(e) {
+  const api = `${API}​/api/livejs/v1/customer/${api_path}/carts`;
+  const Id = e.target.parentNode.parentNode.dataset.id;
+  const num = e.target.value;
+  const obj = {
+    id: Id,
+    quantity: parseInt(num),
+  };
+  axios.patch(api, { data: obj }).then(res => {
+    cartMessageHandler('editCartSuccess');
+  }).catch(err => {
+    cartMessageHandler('editCartError');
+    console.log(err.response);
   })
 }
 
@@ -388,5 +417,6 @@ categorySelect.addEventListener('change', filterCategory);
 removeAllBtn.addEventListener('click', removeAllCart);
 cardGroup.addEventListener('click', addCart);
 cartGroup.addEventListener('click', removeCart);
+cartGroup.addEventListener('change', editCartNum);
 window.addEventListener('scroll', animateHandler);
 submitBtn.addEventListener('click', orderSubmit);
