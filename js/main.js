@@ -89,7 +89,7 @@ function renderCart(arr) {
   arr.forEach(cart => {
     let optionStr = '';
     for (let i = 0; i < 10; i++) {
-      const selected = (i + 1 === cart.quantity ? 'SELECTED ' : '');
+      const selected = (i + 1 === cart.quantity ? 'selected ' : '');
       const content = `<option value="${i + 1}" ${selected}>${i + 1}</option>`;
       optionStr += content;
     }
