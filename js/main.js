@@ -58,8 +58,8 @@ function renderProducts(arr) {
           <img src="${item.images}" alt="">
           <div class="card-content">
             <h3>${item.title}</h3>
-            <del>NT$${item.origin_price}</del>
-            <p>NT$${item.price}</p>
+            <del>NT$${(item.origin_price).toLocaleString()}</del>
+            <p>NT$${item.price.toLocaleString()}</p>
             <div>
               <button class="addCart-btn">加入購物車</button>
               <select class="cart-num-select">
@@ -96,20 +96,20 @@ function renderCart(arr) {
     str += `
       <tr data-id="${cart.id}">
         <td><img src="${cart.product.images}" alt="${cart.product.title}">${cart.product.title}</td>
-        <td>${cart.product.origin_price}</td>
+        <td>${(cart.product.origin_price).toLocaleString()}</td>
         <td>
           <select>
             ${optionStr}
           </select>
         </td>
-        <td>${cart.product.price}</td>
+        <td>${(cart.product.price).toLocaleString()}</td>
         <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
       </tr>
     `;
     totalPrice += cart.product.price * cart.quantity;
   })
   cartGroup.innerHTML = str;
-  totalPriceDom.textContent = `NT $${totalPrice}`;
+  totalPriceDom.textContent = `NT $${(totalPrice).toLocaleString()}`;
 }
 
 // 依輸入框過濾商品卡片
