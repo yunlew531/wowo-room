@@ -88,7 +88,7 @@ function renderCart(arr) {
 
   arr.forEach(cart => {
     let optionStr = '';
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < cart.quantity; i++) {
       const selected = (i + 1 === cart.quantity ? 'selected ' : '');
       const content = `<option value="${i + 1}" ${selected}>${i + 1}</option>`;
       optionStr += content;
@@ -99,10 +99,10 @@ function renderCart(arr) {
         <td>${(cart.product.origin_price).toLocaleString()}</td>
         <td>
           <select>
-            ${optionStr}
+            ${optionStr}     
           </select>
         </td>
-        <td>${(cart.product.price).toLocaleString()}</td>
+        <td>${(cart.product.price * cart.quantity).toLocaleString()}</td>
         <td class="remove-cart-btn"><i class="fas fa-trash"></i></td>
       </tr>
     `;
@@ -157,7 +157,12 @@ function addCart(e) {
   const el = e.target.parentNode.parentNode.parentNode.parentNode;
   const addCartNum = e.target.parentNode.querySelector('.cart-num-select');
   const productId = el.dataset.id;
-  const quantity = parseInt(addCartNum.value);
+  let quantity = parseInt(addCartNum.value);
+  cartData.forEach(item => {
+    if (item.product.id === productId) {
+      quantity += item.quantity;
+    }
+  });
   const cart = {
     productId,
     quantity,
@@ -242,6 +247,8 @@ function editCartNum(e) {
     quantity: parseInt(num),
   };
   axios.patch(api, { data: obj }).then(res => {
+    cartData = res.data.carts;
+    renderCart(cartData);
     cartMessageHandler('editCartSuccess');
   }).catch(err => {
     cartMessageHandler('editCartError');
