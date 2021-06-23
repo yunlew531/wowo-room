@@ -145,9 +145,9 @@ function init() {
 }
 
 let ordersData = [];
-let KEY = ''; // 管理員金鑰
+let KEY = 'uknI6iL82gW94Y0iYoS5couTy4f1'; // 管理員金鑰
 const api_path = 'yunlew531';
-const API = 'https://hexschoollivejs.herokuapp.com';
+const API = 'https://livejs-api.hexschool.io';
 const orderList = document.querySelector('#orderList');
 const removeAllOrderBtn = document.querySelector('.removeAllOrder-btn');
 const paidStatus = document.querySelector('#orderList .paid-status');

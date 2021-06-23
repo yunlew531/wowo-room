@@ -369,7 +369,7 @@ const swiper = new Swiper('.swiper-container', {
 });
 
 const api_path = 'yunlew531';
-const API = 'https://hexschoollivejs.herokuapp.com';
+const API = 'https://livejs-api.hexschool.io';
 const enterAnimate = document.querySelector('#enterAnimate');
 const bannerTitle = document.querySelector('#bannerTitle');
 const bannerTitleText = document.querySelector('#bannerTitle > h2');
