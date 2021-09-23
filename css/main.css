@@ -126,6 +126,24 @@ img {
           box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
+:root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+:root body {
+  position: absolute;
+}
+
+body {
+  width: 100vw;
+  overflow: hidden;
+}
+
 .backend-swap {
   position: relative;
 }
@@ -402,8 +420,10 @@ body {
 }
 
 .index-swap .header a {
+  display: inline-block;
   text-decoration: none;
   color: #000;
+  padding-bottom: 3px;
 }
 
 .index-swap .header .header-nav {
@@ -421,7 +441,6 @@ body {
 }
 
 .index-swap .header .header-nav li {
-  padding-bottom: 3px;
   -webkit-transition: 1s ease;
   transition: 1s ease;
   position: relative;
@@ -497,7 +516,7 @@ body {
   -webkit-backdrop-filter: grayscale(30%) invert(23%) brightness(1.4);
           backdrop-filter: grayscale(30%) invert(23%) brightness(1.4);
   height: 100%;
-  width: 69%;
+  width: 65%;
   z-index: 3;
 }
 
@@ -693,14 +712,6 @@ body {
 
 .index-swap .main .banner-panel .swiper-button-next::after {
   display: none;
-}
-
-.index-swap .main .banner-panel .swiper-pagination {
-  position: absolute;
-  top: 50%;
-  left: -20px;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
 }
 
 .index-swap .main .banner-panel .swiper-pagination-bullet {
@@ -1616,3 +1627,4 @@ body {
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
 }
+/*# sourceMappingURL=main.css.map */

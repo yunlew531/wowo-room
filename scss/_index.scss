@@ -24,15 +24,16 @@ body {
     font-size: $font-m;
     font-weight: bold;
     a {
+      display: inline-block;
       text-decoration: none;
       color: $mainColor;
+      padding-bottom: 3px;
     }
     .header-nav {
       @include flex(space-between, center);
       height: 100%;
       font-size: $font-xs;
       li {
-        padding-bottom: 3px;
         transition: 1s ease;
         position: relative;
         margin-right: 50px;
@@ -93,7 +94,7 @@ body {
           @include absolute(null, null, null, 0);
           backdrop-filter: grayscale(30%) invert(23%) brightness(1.4);
           height: 100%;
-          width: 69%;
+          width: 65%;
           z-index: 3;
           .banner-title {
             @include absolute(38%, 8%);
@@ -232,10 +233,6 @@ body {
         &::after {
           display: none;
         }
-      }
-      .swiper-pagination {
-        @include absolute(50%, -20px);
-        transform: rotate(90deg);
       }
       .swiper-pagination-bullet {
         margin-right: 15px;
